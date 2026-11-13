@@ -1,0 +1,81 @@
+<h1>Grabar un Evento</h1>
+<br>
+<br>
+<form [formGroup]="grabarForm">
+
+    <mat-form-field>
+        <mat-label>Id</mat-label>
+        <input matInput formControlName="id" readonly="true"> 
+    </mat-form-field>
+<br>
+<br>
+    <mat-form-field>
+        <mat-label>Nombre</mat-label>
+        <input matInput formControlName="nombre"> 
+        <span style="color: red;" *ngIf="grabarForm.get('nombre')?.hasError('required')&&grabarForm.get('nombre')?.touched" >Requerido</span>
+        <span style="color: red;" *ngIf="grabarForm.get('nombre')?.hasError('minlength')&&grabarForm.get('nombre')?.touched" >Minimo 2 caracteres</span>
+    </mat-form-field>
+<br>
+<br>
+<!--  
+<mat-form-field>
+        <mat-label>Fecha</mat-label>
+        <input matInput formControlName="fecha"> 
+    </mat-form-field>
+-->
+
+<mat-form-field>
+  <mat-label>Seleccione una fecha</mat-label>
+  <input matInput [matDatepicker]="picker" formControlName="fecha">
+  <mat-hint>MM/DD/YYYY</mat-hint>
+  <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>
+
+
+<br>
+<br>
+    <mat-form-field>
+        <mat-label>Promotora</mat-label>
+        <input matInput formControlName="promotora"> 
+    </mat-form-field>
+<br>
+<br>
+    <mat-form-field>
+        <mat-label>Recinto</mat-label>
+        <input matInput formControlName="recinto" > 
+    </mat-form-field>
+<br>
+<br>
+    <mat-form-field>
+        <mat-label>Pais</mat-label>
+        <!--
+        <input matInput formControlName="pais" > 
+        -->
+        <mat-select formControlName="pais" (selectionChange)="cargarCiudades($event)">
+          <mat-option *ngFor="let pais of paises" [value]="pais.id">{{pais.nombre}}</mat-option>
+      </mat-select>
+
+    </mat-form-field>
+<br>
+<br>
+    <mat-form-field>
+        <mat-label>Ciudad</mat-label>
+        <!--
+            <input matInput formControlName="ciudad" > 
+        -->
+        <mat-select formControlName="ciudad">
+          <mat-option *ngFor="let ciudad of ciudades" [value]="ciudad.id">{{ciudad.nombre}}</mat-option>
+      </mat-select>
+
+
+    </mat-form-field>
+<br>
+
+<br>
+    <button matButton="tonal" routerLink="/eventos/lista-eventos">Cancelar</button>
+    &nbsp;&nbsp;&nbsp;
+    <button matButton="filled" (click)="grabar()" [disabled]="(grabarForm.valid)?false:true" >Grabar</button>   
+
+
+</form>

@@ -1,0 +1,70 @@
+<h1>Lista de Eventos</h1>
+<br>
+
+<br>
+<mat-form-field>
+  <mat-label>Filtro</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Escriba un evento" #input>
+</mat-form-field>
+    &nbsp;&nbsp;&nbsp;
+<button matButton="filled" routerLink="/eventos/insertar-evento">Insertar</button>
+
+
+<table mat-table [dataSource]="dsEventos" class="mat-shadow-2">
+
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> Id </th>
+    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="nombre">
+    <th mat-header-cell *matHeaderCellDef> Nombre </th>
+    <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="fecha">
+    <th mat-header-cell *matHeaderCellDef> Fecha </th>
+    <td mat-cell *matCellDef="let element"> {{element.fecha}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="proximamente">
+    <th mat-header-cell *matHeaderCellDef> ¿Proximo a realizar? </th>
+    <td mat-cell *matCellDef="let element"> {{ proximamente(element.fecha)  }} </td>
+  </ng-container>
+
+
+  <ng-container matColumnDef="promotora">
+    <th mat-header-cell *matHeaderCellDef> Promotora </th>
+    <td mat-cell *matCellDef="let element"> {{element.promotora}} </td>
+  </ng-container>
+
+<ng-container matColumnDef="recinto">
+    <th mat-header-cell *matHeaderCellDef> Recinto </th>
+    <td mat-cell *matCellDef="let element"> {{element.recinto}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="lugar">
+    <th mat-header-cell *matHeaderCellDef> Lugar </th>
+    <td mat-cell *matCellDef="let element"> {{element.ciudadNombre}}, {{element.paisNombre}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="opciones">
+    <th mat-header-cell *matHeaderCellDef> Opciones </th>
+    <td mat-cell *matCellDef="let element"> 
+      <a style="cursor: pointer;" (click)="eliminar(element.id)"> <mat-icon>close</mat-icon>  </a>
+      <a style="cursor: pointer;" routerLink="/eventos/actualizar-evento/{{element.id}}"> <mat-icon>edit</mat-icon>  </a>
+      <a style="cursor: pointer;" routerLink="/eventos/detalle-evento/{{element.id}}"> <mat-icon>notepad</mat-icon>  </a>
+    
+    
+    </td>
+  </ng-container>
+
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+  <!-- Row shown when there is no matching data. -->
+  <tr class="mat-row" *matNoDataRow>
+    <td class="mat-cell" colspan="4">No hay datos que corresponan al filtro "{{input.value}}"</td>
+  </tr>
+</table>

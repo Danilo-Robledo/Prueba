@@ -1,0 +1,21 @@
+<h1>Lucha Web App</h1>
+<br>
+<form [formGroup]="loginForm">
+       <mat-form-field>
+        <mat-label>Usuario</mat-label>
+        <input matInput formControlName="username" > 
+    </mat-form-field> 
+    <br>
+    <br>
+       <mat-form-field>
+        <mat-label>Contraseña</mat-label>
+        <input matInput formControlName="password" type="password" > 
+    </mat-form-field> 
+    <br>
+    <br>
+    <button matButton="filled" (click)="login()">Ingresar</button>
+    <br>
+    <span>Si no tiene usuario, puede registrarse aqui </span><button matButton="tonal" routerLink="/registro">Registrarse</button>
+
+
+</form>

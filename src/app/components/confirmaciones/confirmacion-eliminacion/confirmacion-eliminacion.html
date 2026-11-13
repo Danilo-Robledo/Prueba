@@ -1,0 +1,9 @@
+<h2 mat-dialog-title>Eliminar Elemento</h2>
+<mat-dialog-content class="mat-typography">
+  <h3>¿Está seguro de eliminar el elemento seleccionado?</h3>
+  <p>No podrá deshacer los cambios luego de la eliminación</p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button matButton mat-dialog-close>No</button>
+  <button matButton [mat-dialog-close]="true" cdkFocusInitial>Si</button>
+</mat-dialog-actions>
